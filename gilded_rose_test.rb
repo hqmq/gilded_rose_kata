@@ -149,37 +149,31 @@ class GildedRoseTest < MiniTest::Unit::TestCase
   end
 
   def test_conjured_item_before_sell_date
-    skip
     item = update_quality_for_item_with(5, 10, 'Conjured Mana Cake')
     assert_equal 8, item.quality
   end
 
   def test_conjured_item_at_zero_quality
-    skip
     item = update_quality_for_item_with(5, 0, 'Conjured Mana Cake')
     assert_equal 0, item.quality
   end
 
   def test_conjured_item_on_sell_date
-    skip
     item = update_quality_for_item_with(0, 10, 'Conjured Mana Cake')
     assert_equal 6, item.quality
   end
 
   def test_conjured_item_on_sell_date_at_zero_quality
-    skip
     item = update_quality_for_item_with(0, 0, 'Conjured Mana Cake')
     assert_equal 0, item.quality
   end
 
   def test_conjured_item_after_sell_date
-    skip
     item = update_quality_for_item_with(-10, 10, 'Conjured Mana Cake')
     assert_equal 6, item.quality
   end
 
   def test_conjured_item_after_sell_date_at_zero_quality
-    skip
     item = update_quality_for_item_with(-10, 0, 'Conjured Mana Cake')
     assert_equal 0, item.quality
   end
