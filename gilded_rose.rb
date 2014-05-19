@@ -14,6 +14,8 @@ class Update < SimpleDelegator
       CheeseUpdate.new(item)
     when "Sulfuras, Hand of Ragnaros"
       LegendaryUpdate.new(item)
+    when "Backstage passes to a TAFKAL80ETC concert"
+      BackstageUpdate.new(item)
     else
       new(item)
     end
@@ -45,6 +47,19 @@ class LegendaryUpdate < Update
 
   def next_sell_in
     sell_in
+  end
+end
+
+class BackstageUpdate < Update
+  def next_quality
+    return 0 if sell_in < 0
+    if sell_in < 5
+      [quality + 3,50].min
+    elsif sell_in < 10
+      [quality + 2,50].min
+    else
+      [quality + 1,50].min
+    end
   end
 end
 

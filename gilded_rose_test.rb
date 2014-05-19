@@ -94,67 +94,56 @@ class GildedRoseTest < MiniTest::Unit::TestCase
   end
 
   def test_backstage_pass_long_before_sell_date
-    skip
     item = update_quality_for_item_with(11, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 11, item.quality
   end
 
   def test_backstage_pass_medium_close_to_sell_date_upper_bound
-    skip
     item = update_quality_for_item_with(10, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 12, item.quality
   end
 
   def test_backstage_pass_medium_close_to_sell_date_upper_bound_at_max_quality
-    skip
     item = update_quality_for_item_with(10, 50, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 50, item.quality
   end
 
   def test_backstage_pass_medium_close_to_sell_date_lower_bound
-    skip
     item = update_quality_for_item_with(6, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 12, item.quality
   end
 
   def test_backstage_pass_medium_close_to_sell_date_lower_bound_at_max_quality
-    skip
     item = update_quality_for_item_with(6, 50, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 50, item.quality
   end
 
   def test_backstage_pass_very_close_to_sell_date_upper_bound
-    skip
     item = update_quality_for_item_with(5, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 13, item.quality
   end
 
   def test_backstage_pass_very_close_to_sell_date_upper_bound_at_max_quality
-    skip
     item = update_quality_for_item_with(5, 50, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 50, item.quality
   end
 
   def test_backstage_pass_very_close_to_sell_date_lower_bound
-    skip
     item = update_quality_for_item_with(1, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 13, item.quality
   end
 
   def test_backstage_pass_very_close_to_sell_date_lower_bound_at_max_quality
-    skip
     item = update_quality_for_item_with(1, 50, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 50, item.quality
   end
 
   def test_backstage_pass_on_sell_date
-    skip
     item = update_quality_for_item_with(0, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 0, item.quality
   end
 
   def test_backstage_pass_after_sell_date
-    skip
     item = update_quality_for_item_with(-10, 10, 'Backstage passes to a TAFKAL80ETC concert')
     assert_equal 0, item.quality
   end
