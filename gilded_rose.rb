@@ -1,48 +1,38 @@
 def update_quality(items)
   items.each do |item|
-    if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
-      if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
-          item.quality -= 1
-        end
-      end
+    update = Update.for(item)
+    item.sell_in = update.next_sell_in
+    item.quality = update.next_quality
+  end
+end
+
+require 'delegate'
+class Update < SimpleDelegator
+  def self.for(item)
+    case item.name
+    when "Aged Brie"
+      CheeseUpdater.new(item)
     else
-      if item.quality < 50
-        item.quality += 1
-        if item.name == 'Backstage passes to a TAFKAL80ETC concert'
-          if item.sell_in < 11
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-          if item.sell_in < 6
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-        end
-      end
+      new(item)
     end
-    if item.name != 'Sulfuras, Hand of Ragnaros'
-      item.sell_in -= 1
-    end
-    if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-          if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              item.quality -= 1
-            end
-          end
-        else
-          item.quality = item.quality - item.quality
-        end
-      else
-        if item.quality < 50
-          item.quality += 1
-        end
-      end
-    end
+  end
+
+  def next_sell_in
+    sell_in - 1
+  end
+
+  def next_quality
+    n = quality - 1
+    n -= 1 if sell_in <= 0
+    [n, 0].max
+  end
+end
+
+class CheeseUpdater < Update
+  def next_quality
+    n = quality + 1
+    n += 1 if sell_in <= 0
+    [n,50].min
   end
 end
 
