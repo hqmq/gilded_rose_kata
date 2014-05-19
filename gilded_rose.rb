@@ -16,6 +16,8 @@ class Update < SimpleDelegator
       LegendaryUpdate.new(item)
     when "Backstage passes to a TAFKAL80ETC concert"
       BackstageUpdate.new(item)
+    when "Conjured Mana Cake"
+      ConjuredUpdate.new(item)
     else
       new(item)
     end
@@ -60,6 +62,14 @@ class BackstageUpdate < Update
     else
       [quality + 1,50].min
     end
+  end
+end
+
+class ConjuredUpdate < Update
+  def next_quality
+    n = quality - 2
+    n -= 2 if sell_in <= 0
+    [n, 0].max
   end
 end
 
