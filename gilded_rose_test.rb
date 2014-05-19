@@ -79,19 +79,16 @@ class GildedRoseTest < MiniTest::Unit::TestCase
   end
 
   def test_sulfuras_before_sell_date
-    skip
     item = update_quality_for_item_with(5, 80, 'Sulfuras, Hand of Ragnaros', 0)
     assert_equal 80, item.quality
   end
 
   def test_sulfuras_on_sell_date
-    skip
     item = update_quality_for_item_with(0, 80, 'Sulfuras, Hand of Ragnaros', 0)
     assert_equal 80, item.quality
   end
 
   def test_sulfuras_after_sell_date
-    skip
     item = update_quality_for_item_with(-10, 80, 'Sulfuras, Hand of Ragnaros', 0)
     assert_equal 80, item.quality
   end

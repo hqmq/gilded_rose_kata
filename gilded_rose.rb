@@ -11,7 +11,9 @@ class Update < SimpleDelegator
   def self.for(item)
     case item.name
     when "Aged Brie"
-      CheeseUpdater.new(item)
+      CheeseUpdate.new(item)
+    when "Sulfuras, Hand of Ragnaros"
+      LegendaryUpdate.new(item)
     else
       new(item)
     end
@@ -28,11 +30,21 @@ class Update < SimpleDelegator
   end
 end
 
-class CheeseUpdater < Update
+class CheeseUpdate < Update
   def next_quality
     n = quality + 1
     n += 1 if sell_in <= 0
     [n,50].min
+  end
+end
+
+class LegendaryUpdate < Update
+  def next_quality
+    quality
+  end
+
+  def next_sell_in
+    sell_in
   end
 end
 
